@@ -1,0 +1,37 @@
+header{
+    color:white;
+    background-color: rgb(61, 112, 189);
+    height:100px;
+    margin:0;
+    width: 100%;
+}
+body{
+    margin:0;
+}
+html{
+    font-family: sans-serif;
+}
+h1{
+    margin:0;
+    margin-left:50%;
+    padding-top:30px;
+    font-size: 2.5em;
+}
+.logo{
+    text-decoration: none;
+    color:white;
+}
+.col{
+    width:50%;
+    float:left;
+}
+button{
+    margin:35px 0px 0px 370px; 
+    background-color: rgb(55, 98, 163);
+    color:white;
+    border:1px solid grey;
+}
+button:hover{
+    background-color: rgb(61, 112, 189);
+    cursor: pointer;
+}
