@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> hindu page</title>
+<style>
+body {
+margin:auto;
+  background-color: white;
+ padding:150px;
+width:60%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(157, 173, 179);
+}
+ .container{
+   width: 50%;
+   margin: auto;
+   border: 1px solid teal;
+  padding:5px;
+  margin-top:5px;
+  margin:5px 0px 5px 0px;
+  border-radius: 15px;
+  background-color:snow;
+ }
+ .name{
+  
+  display:inline;
+  
+ }
+ #checkbox{
+  width:50%;
+padding-top:10px;
+margin:auto;
+display:inline;
+float:left;
+ }
+  
+  input[type=text], input[type=tel], input[type=email]{
+    padding: 10px;
+    background-color: rgb(206, 203, 203);
+  }
+  input:focus{
+    background-color: snow;
+  }
+  button{
+    padding:5px 20px 5px 20px ;
+     margin="30%"; 
+     width="40%";
+      text-align="center"; 
+      background-color:forestgreen;
+      cursor: pointer ;
+
+  }
+  button:hover
+  {
+     font-size: 1.5em;
+  }
+  .radio{
+    width:50%;
+padding-top:10px;
+margin:auto;
+display:inline;
+float:left;
+  }
+<button type="button">Click Me!</button>
+<form >
+  <div class="container">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    <div class ="name">
+
+    <p style="text-align=center;"><b>First name</b></p>
+    <input type="text" placeholder="Enter First Name" name="First Name"required>
+
+    <p style="text-align=center;"><b>Last name</b></p>
+    <input type="text" placeholder="Last Name" name="Last Nmae" required>
+  </div>
+    <p style="text-align=center;"><b>Email</b></p>
+    <input type="email" placeholder="Email" name="Email" required>
+     <p style="text-align=center;"><b>phone number</b></p>
+    <input type="tel" placeholder="Phone Number" name="Phone Number" ><br>
+    <hr>
+
+ 
+  <div class="check">
+    <h1 style="font-size: 20px;"> Choose Your Choice</h1>
+    <div id="checkbox">
+  <input type="checkbox" id="sports" name="sports" value="sports">
+<label for="sports"> sports</label><br>
+<input type="checkbox" id="politics" name="politics" value="politics">
+<label for="politics"> politics</label><br>
+<input type="checkbox" id="film" name="film" value="film">
+<label for="film"> film</label><br>
+</div>
+<div>
+<input type="checkbox" id="cricket" name="cricket" value="cricket">
+<label for="cricket"> cricket</label><br>
+<input type="checkbox" id="football" name="vehicle2" value="football">
+<label for="football"> football</label><br>
+<input type="checkbox" id="normal" name="normal" value="normal">
+<label for="normal"> normal</label><br>
+</div>
+
+</div>
+<h3><b> Notify Me for Newletters</b></h3>
+<div class="radio">
+<input type="radio" id="Yes" >
+  <label for="Yes">Yes</label>
+  <input type="radio" id="Nos" >
+  <label for="No">No</label>
+</div>
+<br><br>
+</form>
+<br>
+ 
+<input type="checkbox" id="normal" name="normal" value="normal">
+<label for="normal"> I accepts Terms and Conditions</label><br><br>
+<center>
+<button type="submit" form="nameform" value="Submit" title="tap here">Submit</button></center>
