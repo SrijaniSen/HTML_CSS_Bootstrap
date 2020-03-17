@@ -1,0 +1,14 @@
+
+.bggreen{
+    background-color: rgb(93, 163, 93);
+}
+.fg-black{
+    color:rgb(31, 30, 30);
+}
+.form-check{
+width:50%;
+padding-top:10px;
+margin:auto;
+display:inline;
+float:left;
+}
