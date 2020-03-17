@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calcu</title>
+</head>
+
+<body>
+    <input type="text" id="no1">
+    <input type="text" id="no2">
+    <button onclick="calc(1)">+</button>
+    <button onclick="calc(2)">*</button>
+    <button onclick="calc(3)">-</button>
+    <button onclick="calc(4)">/</button>
+    <input type="text" id="result">
+    <script>
+        function calc(m) {
+            var x = Number(document.getElementById("no1").value);
+            var y = Number(document.getElementById("no2").value);
+            if (m == 1) {
+                var res1 = (x + y);
+                document.getElementById("result").value = res1;
+            }
+            if (m == 3) {
+                var res1 = (x - y);
+                document.getElementById("result").value = res1;
+            }
+            if (m == 2) {
+                var res1 = (x * y);
+                document.getElementById("result").value = res1;
+            }
+            if (m == 4) {
+                var res1 = (x / y);
+                document.getElementById("result").value = res1;
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
