@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <title> number</title>
+
+
+</head>
+
+<body>
+    <center>
+        <label for="Enter your name">Name</label>
+        <input type="text" id="name" name="Name"><br><br>
+        <button type="button" onclick="validate()">click</button>
+
+        <label for="Enter DOB">Date of Birth</label>
+        <input type="text" id="dob" name="dob"><br><br>
+        <button type="button" onclick="validate()">Print</button>
+        <p id="demo"></p>
+    </center>
+    <script>
+       function validate(name)
+{
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    var ctrl =  document.getElementById(name);
+
+    if (regex.test(ctrl.value)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+                document.getElementById("demo").innerHTML = text;
+
+            }
+        }
+    </script>
+</body>
+
+
+</html>

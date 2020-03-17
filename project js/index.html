@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <title> number</title>
+
+
+</head>
+
+<body>
+    <center>
+        <label for="First Number">First Number</label>
+        <input type="text" id="no1" name="No 1"><br><br>
+
+        <label for="Second Number">Secomnd Number</label>
+        <input type="text" id="no2" name="No 2"><br><br>
+        <button type="button" onclick="calc()">Print</button>
+        <p id="demo"></p>
+    </center>
+    <script>
+        function calc() {
+            var x = document.getElementById('no1').value;
+            var y = document.getElementById('no2').value;
+            var out, i;
+            var text='';
+            for (i = 1; i <= y; i++) {
+                out = x * i;
+                text += out + "<br>";
+                console.log(text);
+                document.getElementById("demo").innerHTML = text;
+
+            }
+        }
+    </script>
+</body>
+
+
+</html>
