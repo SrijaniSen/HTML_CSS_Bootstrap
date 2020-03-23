@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Random</h2>
+
+    <div>
+        Enter Number: <input type="number" name="first" id="x1">
+        <button type="button" onclick="area()">Check</button>
+        <h3 id="demo"></h3>
+    </div>
+
+    <script>
+        function area() {
+            var side1 = document.getElementById('x1').value;
+            var random=Math.floor(Math.random() * 10) + 1;
+            var output="";
+            if(side1==random)
+            {
+                output +="Random number ="+random+" Good Work";
+            }
+            else
+                output+="Random number ="+random+" Not matched";
+            document.getElementById("demo").innerHTML = output;
+            console.log("Answer=" + output)
+            document.getElementById('demo').innerText = output;
+        }
+
+        
+    </script>
+
+</body>
+
+</html>
