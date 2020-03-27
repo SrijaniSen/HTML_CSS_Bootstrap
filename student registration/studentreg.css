@@ -1,0 +1,24 @@
+.form-control:focus {
+    outline: none;
+}
+.mar {
+    margin-left: 140px;
+}
+.shift {
+    margin-left: 100px;
+    margin-top: -8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.shift2 {
+    margin-left: 70px;
+    margin-top: 16px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.btn-secondary{
+   background-color: rgb(20, 123, 172);
+}
+.tb{
+    background-color: rgb(58, 108, 184);
+}
