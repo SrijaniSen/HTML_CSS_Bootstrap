@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>OP</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="order.js"></script>
+    <style>
+        body {
+            margin: 50px auto;
+            width: 600px;
+        }
+        /* CSS for Credit Card Payment form */
+        
+        .credit-card-box .panel-title {
+            display: inline;
+            font-weight: bold;
+        }
+        
+        .credit-card-box .form-control.error {
+            border-color: red;
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+        
+        .credit-card-box label.error {
+            font-weight: bold;
+            color: red;
+            padding: 2px 8px;
+            margin-top: 2px;
+        }
+        
+        .credit-card-box .payment-errors {
+            font-weight: bold;
+            color: red;
+            padding: 2px 8px;
+            margin-top: 2px;
+        }
+        
+        .credit-card-box label {
+            display: block;
+        }
+        /* The old "center div vertically" hack */
+        
+        .credit-card-box .display-table {
+            display: table;
+        }
+        
+        .credit-card-box .display-tr {
+            display: table-row;
+        }
+        
+        .credit-card-box .display-td {
+            display: table-cell;
+            vertical-align: middle;
+            width: 50%;
+        }
+        /* Just looks nicer */
+        
+        .credit-card-box .panel-heading img {
+            min-width: 180px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 ">
+                <p class="message" name="message" id="message" style="display: none;"></p>
+                <form name="orderForm">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label col-form-label-sm text-info" for="itemName">Item Name</label>
+                            <input type="text" class="form-control form-control-sm" id="itemName" placeholder="Please provide the item name." required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="col-form-label col-form-label-sm text-info" for="itemCode">Code</label>
+                            <input type="text" name="code" id="itemCode" class="form-control form-control-sm" placeholder="Please enter the code of the item." required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="col-form-label col-form-label-sm text-info" for="itemQty">Quantity</label>
+                            <input type="text" class="form-control form-control-sm" id="itemQty" placeholder="Item quantity." required min="1">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="col-form-label col-form-label-sm text-info" for="itemPrice">Unit Price</label>
+                            <div class="input-group input-group-sm mb-3">
+
+                                <input type="text" class="form-control form-control-sm" id="itemPrice" placeholder="Item unit price." required min="1">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-info btn-sm float-right" onclick="addItem()">Add Item</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="max-height: 300px; overflow-x:scroll">
+                <table class="table table-sm" id="ordersTable" style="overflow-x:scroll;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Item Code</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Net Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body1">
+
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-12 bg-active text-info">
+                        <p>No of Items <span id="count"></span></p>
+                        <p>Items Total <span id="cost"></span> </p>
+                        <p>Net Payable Amount <span id="costwithgst"></span> </p>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">CheckOut</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <div class="container">
+                            <div class="row">
+                                <!-- You can make it whatever width you want. I'm making it full width
+                            on <= small devices and 4/12 page width on >= medium devices -->
+                                <div class="col-xs-12 col-md-4 offset-3">
+
+
+                                    <!-- CREDIT CARD FORM STARTS HERE -->
+                                    <div class="panel panel-default credit-card-box">
+                                        <div class="panel-heading display-table">
+                                            <div class="row display-tr">
+                                                <h3 class="panel-title display-td">Payment Details</h3>
+                                                <div class="display-td">
+                                                    <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <form role="form" id="payment-form">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="cardNumber">CARD NUMBER</label>
+                                                            <div class="input-group">
+                                                                <input type="tel" class="form-control" name="cardNumber" id="cardno" placeholder="Valid Card Number" autocomplete="cc-number" required autofocus />
+                                                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-7 col-md-7">
+                                                        <div class="form-group">
+                                                            <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                                            <input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" id="expiry" autocomplete="cc-exp" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-5 col-md-5 pull-right">
+                                                        <div class="form-group">
+                                                            <label for="cardCVC">CV CODE</label>
+                                                            <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" id="cvv" autocomplete="cc-csc" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="couponCode">COUPON CODE</label>
+                                                            <input type="text" class="form-control" name="couponCode" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="couponCode">Shipping Address</label>
+                                                            <input type="text" class="form-control" id="add" name="couponCode" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg1" onclick="check()">Pay</button>
+                                                    </div>&ensp;&ensp;&ensp;&ensp;&ensp;
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="check2()">
+                                                        GenerateBill
+                                                      </button>
+                                                </div>
+                                                <div class="row" style="display:none;">
+                                                    <div class="col-xs-12">
+                                                        <p class="payment-errors"></p>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- CREDIT CARD FORM ENDS HERE -->
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <!-- If you're using Stripe for payments -->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="couponCode">Shipping Address</label>
+                        <input type="text" class="form-control" id="uadd" name="couponCode" />
+                    </div>
+                    <div class="form-group">
+                        <label for="couponCode">TotalCost</label>
+                        <input type="text" class="form-control" id="price" name="couponCode" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+
+
+    <script src="order.js"></script>-->
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
